@@ -16,6 +16,7 @@ import com.example.koszykowka.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     PunktyViewModel punktyViewModel;
+    PunktyViewModel2 punktyViewModel2;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         punktyViewModel = new ViewModelProvider(this).get(PunktyViewModel.class);
+        punktyViewModel2 = new ViewModelProvider(this).get(PunktyViewModel2.class);
 
         punktyViewModel.getPunkty().observe(
                 this,
@@ -31,6 +33,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(Integer integer) {
                         binding.textView.setText("" + integer);
+                    }
+                }
+        );
+
+        punktyViewModel2.getPunkty().observe(
+                this,
+                new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer integer2) {
+                        binding.textView2.setText("" + integer2);
                     }
                 }
         );
@@ -57,7 +69,36 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        punktyViewModel.addPunkty(3);
+                        punktyViewModel.addPunkty(40000000);
+
+                    }
+                }
+        );
+
+
+        binding.button4.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        punktyViewModel2.addPunkty(1);
+
+                    }
+                }
+        );
+        binding.button5.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        punktyViewModel2.addPunkty(2);
+
+                    }
+                }
+        );
+        binding.button6.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        punktyViewModel2.addPunkty(4000000);
 
                     }
                 }
